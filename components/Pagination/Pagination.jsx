@@ -1,7 +1,12 @@
 import styles from "./Pagination.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchJobData } from "../../store/actions";
 import { setMinPageLimit, setMaxPageLimit } from "../../store/results-slice";
+
+// Saga implementation
+import { fetchJobData } from "../../store/jobs-slice";
+
+// Thunk implementation
+// import { fetchJobData } from "../../store/actions";
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -26,7 +31,7 @@ const Pagination = () => {
       dispatch(setMaxPageLimit(maxPageLimit - pageNumberLimit));
       dispatch(setMinPageLimit(minPageLimit - pageNumberLimit));
     }
-    dispatch(fetchJobData(query, currentPage - 1));
+    dispatch(fetchJobData({ query, page: currentPage - 1 }));
   };
 
   const nextClickHandler = () => {
@@ -34,11 +39,11 @@ const Pagination = () => {
       dispatch(setMaxPageLimit(maxPageLimit + pageNumberLimit));
       dispatch(setMinPageLimit(minPageLimit + pageNumberLimit));
     }
-    dispatch(fetchJobData(query, currentPage + 1));
+    dispatch(fetchJobData({ query, page: currentPage + 1 }));
   };
 
   const pageChangeHandler = (event) => {
-    dispatch(fetchJobData(query, event.target.value));
+    dispatch(fetchJobData({ query, page: parseInt(event.target.value) }));
   };
 
   let pageIncrementEllipses = null;

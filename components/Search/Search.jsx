@@ -3,7 +3,12 @@ import Image from "next/image";
 import SearchIcon from "/Search.svg";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { fetchJobData } from "../../store/actions";
+import { setMinPageLimit, setMaxPageLimit } from "../../store/results-slice";
+
+// Saga implementation
+import { fetchJobData } from "../../store/jobs-slice";
+// Thunk implementation
+// import { fetchJobData } from "../../store/actions";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -11,7 +16,9 @@ const Search = () => {
 
   const fetchJobDataHandler = (event) => {
     event.preventDefault();
-    dispatch(fetchJobData(inputRef.current.value, 1));
+    dispatch(setMaxPageLimit(5));
+    dispatch(setMinPageLimit(0));
+    dispatch(fetchJobData({ query: inputRef.current.value, page: 1 }));
   };
 
   return (

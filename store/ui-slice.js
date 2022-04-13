@@ -7,14 +7,14 @@ const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    fetchStart: (state) => {
+    startLoader: (state) => {
       state.loading = true;
     },
-    fetchComplete: (state) => {
+    endLoader: (state) => {
       state.loading = false;
     },
   },
 });
 
-export const { fetchStart, fetchComplete } = uiSlice.actions;
+export const { startLoader, endLoader } = uiSlice.actions;
 export default uiSlice.reducer;

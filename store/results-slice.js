@@ -14,14 +14,18 @@ const resultsSlice = createSlice({
   name: "results",
   initialState,
   reducers: {
-    getResults: (state, { payload }) => {
+    getPageResults: (state, { payload }) => {
       const {
-        data: { query, page, total_pages: total, total_num: pageNum },
+        data: { page, total_pages: total, total_num: pageNum },
       } = payload;
-      state.query = query;
-      state.page = page;
       state.totalPages = total;
       state.totalNum = pageNum;
+    },
+    setQuery: (state, { payload }) => {
+      state.query = payload;
+    },
+    setPage: (state, { payload }) => {
+      state.page = payload;
     },
     setMinPageLimit: (state, { payload }) => {
       state.minPageLimit = payload;
@@ -32,6 +36,11 @@ const resultsSlice = createSlice({
   },
 });
 
-export const { getResults, setMinPageLimit, setMaxPageLimit } =
-  resultsSlice.actions;
+export const {
+  getPageResults,
+  setQuery,
+  setPage,
+  setMinPageLimit,
+  setMaxPageLimit,
+} = resultsSlice.actions;
 export default resultsSlice.reducer;

@@ -55,9 +55,11 @@
   border: 1px solid var(--color-primary-light);
   width: 100%;
   background-color: transparent;
+  transition: all 0.1s;
 }
 
 .form button:hover {
   color: var(--color-grey-light-1);
   background-color: var(--color-primary-light);
+  transform: translateY(1px);
 }

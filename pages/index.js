@@ -5,9 +5,14 @@ import styles from "../styles/Home.module.css";
 import { Fragment, useEffect } from "react";
 import JobList from "../components/Job/JobList";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchJobData } from "../store/actions";
+import Loader from "../components/Loader";
 import Pagination from "../components/Pagination/";
 import Results from "../components/Results";
+
+// Saga implementation
+import { fetchJobData } from "../store/jobs-slice";
+// Thunk implementation
+// import { fetchJobData } from "../store/actions";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -19,7 +24,7 @@ export default function Home() {
   } = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(fetchJobData("test", 1));
+    dispatch(fetchJobData({ query: "test", page: 1 }));
   }, []);
 
   return (
@@ -37,7 +42,8 @@ export default function Home() {
         <div className={styles.appWrapper}>
           <Header />
           <Search />
-          <Results />
+
+          {loading ? <Loader /> : <Results />}
           {!loading && <JobList />}
           {!loading && totalPages > 0 && <Pagination />}
         </div>

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
   jobs: [],
 };
@@ -7,7 +8,8 @@ const jobsSlice = createSlice({
   name: "jobs",
   initialState,
   reducers: {
-    replaceJobs: (state, { payload }) => {
+    fetchJobData: (state, { payload }) => {},
+    getJobsData: (state, { payload }) => {
       const {
         data: { jobs },
       } = payload;
@@ -16,5 +18,5 @@ const jobsSlice = createSlice({
   },
 });
 
-export const { replaceJobs } = jobsSlice.actions;
+export const { getJobsData, fetchJobData } = jobsSlice.actions;
 export default jobsSlice.reducer;

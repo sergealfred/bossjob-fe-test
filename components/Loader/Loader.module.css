@@ -1,0 +1,18 @@
+.loader {
+  border: 1rem solid var(--color-grey-light-2);
+  border-top: 1rem solid var(--color-primary-light);
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  animation: spin 2s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
